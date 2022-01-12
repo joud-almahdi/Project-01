@@ -3,6 +3,7 @@ package com.saraha.myposts.view.Login
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
@@ -10,12 +11,19 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.saraha.myposts.R
 import com.saraha.myposts.databinding.ActivityLoginBinding
 import com.saraha.myposts.view.Signup.SignupActivity
 
 
 class loginActivity : AppCompatActivity() {
+    val auth: FirebaseAuth = Firebase.auth
+    var user=auth.currentUser
+    lateinit var shared: SharedPreferences
+    lateinit var sharededitor: SharedPreferences.Editor
 private lateinit var binding:ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +49,22 @@ private lateinit var binding:ActivityLoginBinding
             var emailastext=binding.EmailTextFieldInLogin.text.toString()
             var passwordastext=binding.PasswordTextFieldInLogin.text.toString()
 
+                if(emailastext.isNotBlank() && passwordastext.isNotBlank())
+                {
+                    FirebaseAuth.getInstance().signInWithEmailAndPassword(emailastext,passwordastext).addOnCompleteListener {
+                        if(it.isSuccessful)
+                        {
+                            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()  //startActivity(Intent(this, HomeActivity::class.java))
+                        }
+                        else
+                        {
+                            Toast.makeText(this, it.exception!!.message.toString(), Toast.LENGTH_SHORT).show()
+                        }
 
+
+                    }
+
+                }
 
 
         }
