@@ -8,6 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import com.saraha.myposts.R
 import com.saraha.myposts.view.Login.loginActivity
 import com.saraha.myposts.databinding.ActivitySignupBinding
+import java.util.*
 
 class SignupActivity : AppCompatActivity() {
 
@@ -35,23 +36,24 @@ class SignupActivity : AppCompatActivity() {
 
     //Check all data is entered then send to firebase authentication
     private fun verifyRegistrationFormFields() {
-        if (viewModel.isEditTextValid){
+        if (viewModel.isEditTextValid && viewModel.user.isSignUpEmpty()){
+            viewModel.user.join_date = Calendar.getInstance().timeInMillis
 
         }
     }
 
     private fun onTextChangeValidation(){
         binding.editTextSignupName.addTextChangedListener {
-            viewModel.validateText(binding.editTextSignupUsername)
+            viewModel.validateText(binding.editTextSignupUsername, 1)
         }
         binding.editTextSignupUsername.addTextChangedListener {
-            viewModel.validateText(binding.editTextSignupUsername)
+            viewModel.validateText(binding.editTextSignupUsername, 2)
         }
         binding.editTextSignupEmail.addTextChangedListener {
-            viewModel.validateEmail(binding.editTextSignupEmail)
+            viewModel.validateEmail(binding.editTextSignupEmail, 3)
         }
         binding.editTextSignupPassword.addTextChangedListener {
-            viewModel.validatePassword(binding.editTextSignupPassword)
+            viewModel.validatePassword(binding.editTextSignupPassword, 0)
         }
     }
 
