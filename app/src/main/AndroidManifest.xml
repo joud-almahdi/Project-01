@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyPosts">
         <activity
-            android:name=".loginActivity"
+            android:name=".view.Login.loginActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.Splash.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

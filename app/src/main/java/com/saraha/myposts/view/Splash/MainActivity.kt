@@ -1,11 +1,12 @@
-package com.saraha.myposts.View.Signup
+package com.saraha.myposts.view.Splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.saraha.myposts.R
 
-class SignupActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+        setContentView(R.layout.activity_main)
     }
 }
