@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyPosts">
         <activity
+            android:name=".view.Home.HomeActivity"
+            android:exported="true" />
+        <activity
             android:name=".view.Login.loginActivity"
             android:exported="true" />
         <activity
