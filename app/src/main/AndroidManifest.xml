@@ -13,6 +13,9 @@
             android:name=".view.Login.loginActivity"
             android:exported="true" />
         <activity
+            android:name=".view.Signup.SignupActivity"
+            android:exported="true" />
+        <activity
             android:name=".view.Splash.MainActivity"
             android:exported="true">
             <intent-filter>

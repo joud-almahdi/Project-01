@@ -9,6 +9,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.saraha.myposts.R
 import com.saraha.myposts.view.Login.loginActivity
+import com.saraha.myposts.view.Signup.SignupActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

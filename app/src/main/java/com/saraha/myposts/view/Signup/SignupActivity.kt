@@ -1,8 +1,10 @@
 package com.saraha.myposts.view.Signup
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
@@ -41,7 +43,10 @@ class SignupActivity : AppCompatActivity() {
     private fun verifyRegistrationFormFields() {
         val password = binding.editTextSignupPassword
         val email = binding.editTextSignupEmail
-        if (viewModel.isEditTextValid && viewModel.user.isSignUpEmpty() && password.text?.isNotEmpty() == true){
+        Log.d(TAG,"SignupActivity: - verifyRegistrationFormFields: - isEditTextValid: ${viewModel.isEditTextValid}")
+        Log.d(TAG,"SignupActivity: - verifyRegistrationFormFields: - isSignUpEmpty: ${viewModel.user.isSignUpNotEmpty() }")
+        Log.d(TAG,"SignupActivity: - verifyRegistrationFormFields: - passowrd: ${password.text?.isNotEmpty() == true}")
+        if (viewModel.isEditTextValid && viewModel.user.isSignUpNotEmpty() && password.text?.isNotEmpty() == true){
             viewModel.user.join_date = Calendar.getInstance().timeInMillis
 
             createUserFirebaseAuth(email, password)
@@ -70,14 +75,20 @@ class SignupActivity : AppCompatActivity() {
 
     private fun createUserAccount() {
         viewModel.createAnAccountInFirebase(viewModel.user.signUpHash())
-        viewModel.createAccountResponseLiveData.observe(this) {
-
+        viewModel.createAccountResponseLiveData.observe(this) { result ->
+            if (result.first) {
+                //startActivity(Intent(this))
+                Toast.makeText(this,"redirect", Toast.LENGTH_LONG).show()
+            }
+            else {
+                handleException(result)
+            }
         }
     }
 
     private fun onTextChangeValidation(){
         binding.editTextSignupName.addTextChangedListener {
-            viewModel.validateText(binding.editTextSignupUsername, 1)
+            viewModel.validateText(binding.editTextSignupName, 1)
         }
         binding.editTextSignupUsername.addTextChangedListener {
             viewModel.validateText(binding.editTextSignupUsername, 2)
