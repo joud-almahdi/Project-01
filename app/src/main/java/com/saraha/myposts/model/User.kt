@@ -10,7 +10,7 @@ data class User (
     var join_date: Long
         ){
 
-    fun isSignUpEmpty() = name.isNotEmpty() && username.isNotEmpty() && email.isNotEmpty()
+    fun isSignUpNotEmpty() = name.isNotEmpty() && username.isNotEmpty() && email.isNotEmpty()
 
     fun isProfileEmpty() = name.isNotEmpty() && username.isNotEmpty() && email.isNotEmpty()
             && photo?.isNotEmpty() == true && personalInfo?.isNotEmpty() == true

@@ -9,6 +9,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.saraha.myposts.R
 import com.saraha.myposts.view.Login.loginActivity
+import com.saraha.myposts.view.Signup.SignupActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             if (Firebase.auth.currentUser?.uid?.isNotEmpty() == true){
                 //startActivity(Intent(this, HomeActivity::class.java))
             } else {
-                startActivity(Intent(this, loginActivity::class.java))
+                startActivity(Intent(this, SignupActivity::class.java))
             }
             finish()
         }, 2000)

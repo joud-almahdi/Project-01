@@ -1,5 +1,7 @@
 package com.saraha.myposts.view.Signup
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.material.textfield.TextInputEditText
@@ -19,14 +21,18 @@ class SignupViewModel: ViewModel() {
 
     //Function to handle firebase repository for signing up a user
     fun signUpUserInFirebase(email: String, password: String){
+        Log.d(TAG,"SignupViewModel: - signUpUserInFirebase: - : ${email} - $password")
         UserRepository().signupUser(email, password).observeForever {
+            Log.d(TAG,"SignupViewModel: - signUpUserInFirebase: - : ${it.first} - ${it.second}")
             signInResponseLiveData.postValue(it)
         }
     }
 
     //Function to handle firebase repository for creating an account for a user
     fun createAnAccountInFirebase(newUser: HashMap<String, Any?>){
+        Log.d(TAG,"SignupViewModel: - createAnAccountInFirebase: - : ${newUser.values}")
         UserRepository().createUserAccount(newUser).observeForever {
+            Log.d(TAG,"SignupViewModel: - createAnAccountInFirebase: - : ${it.first} - ${it.second}")
             createAccountResponseLiveData.postValue(it)
         }
     }
@@ -57,6 +63,7 @@ class SignupViewModel: ViewModel() {
         } else {
             v.error = null
             isEditTextValid = true
+            Log.d(TAG,"SignupViewModel: - handleTextFields: - : ${v.text.toString()}")
             when (index){
                 1 -> user.name = v.text.toString()
                 2 -> user.username = v.text.toString()
