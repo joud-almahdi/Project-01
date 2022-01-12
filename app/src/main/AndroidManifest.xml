@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyPosts">
         <activity
-            android:name=".View.Signup.SignupActivity"
+            android:name=".loginActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
