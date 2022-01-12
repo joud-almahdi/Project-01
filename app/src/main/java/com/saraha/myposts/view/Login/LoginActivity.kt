@@ -21,14 +21,12 @@ import com.saraha.myposts.view.Signup.SignupActivity
 
 class loginActivity : AppCompatActivity() {
     val auth: FirebaseAuth = Firebase.auth
-    var user=auth.currentUser
-    lateinit var shared: SharedPreferences
-    lateinit var sharededitor: SharedPreferences.Editor
 private lateinit var binding:ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        toolbar()
         binding.ForgotMyPasswordInLogin.setOnClickListener {
             showdialog()
 
@@ -108,5 +106,13 @@ private lateinit var binding:ActivityLoginBinding
         builder.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
 
         builder.show()
+    }
+
+
+    fun toolbar()
+    {
+        val mainToolbar = binding.toolbarInLogin
+        mainToolbar.title = getString(R.string.login)
+        setSupportActionBar(mainToolbar)
     }
 }
