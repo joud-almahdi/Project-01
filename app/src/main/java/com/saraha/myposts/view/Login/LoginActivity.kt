@@ -85,6 +85,24 @@ private lateinit var binding:ActivityLoginBinding
         builder.setView(input)
 
         builder.setPositiveButton("Send", DialogInterface.OnClickListener { dialog, which ->
+            if(input.text.isNotBlank())
+            {
+                FirebaseAuth.getInstance().sendPasswordResetEmail(input.text.toString()).addOnCompleteListener {
+                    if (it.isSuccessful)
+                    {
+                        Toast.makeText(this, "Sent Successfully", Toast.LENGTH_SHORT).show()
+                    }
+                    else
+                    {
+                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            else
+            {
+
+                Toast.makeText(this, "Email field was empty", Toast.LENGTH_SHORT).show()
+            }
 
         })
         builder.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
