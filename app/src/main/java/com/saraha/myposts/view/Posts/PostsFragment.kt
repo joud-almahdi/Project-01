@@ -5,56 +5,47 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.saraha.myposts.R
+import com.saraha.myposts.databinding.FragmentPostsBinding
+import com.saraha.myposts.model.Post
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PostsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PostsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    //View model and binding lateinit property
+    val viewModel: PostsViewModel by viewModels()
+    lateinit var binding: FragmentPostsBinding
+    //list of animals and recycler view adapter lateinit property
+    lateinit var postsList: List<Post>
+    lateinit var adapter: ViewPostsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_posts, container, false)
+    ): View {
+        binding = FragmentPostsBinding.inflate(inflater, container, false)
+
+        getPosts()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PostsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PostsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    fun getPosts(){
+        viewModel.getAllPostsFromFirebase()
+        viewModel.listOfPostsLiveData.observe(viewLifecycleOwner){
+            if (it.isNotEmpty()) setRecyclerViewWithData(it!!)
+        }
     }
+
+    //Function to set data into recyclerview
+    private fun setRecyclerViewWithData(posts: List<Post>) {
+        postsList = posts.sortedBy { it.timeStamp }
+        val recyclerView = binding.recyclerViewPosts
+        recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
+        adapter = ViewPostsAdapter(this.requireContext() ,postsList)
+        recyclerView.adapter = adapter
+    }
+
 }
