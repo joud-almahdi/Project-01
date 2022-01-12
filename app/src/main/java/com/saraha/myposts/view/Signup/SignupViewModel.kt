@@ -1,17 +1,35 @@
 package com.saraha.myposts.view.Signup
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.saraha.myposts.helper.ValidationHelper
 import com.saraha.myposts.model.User
+import com.saraha.myposts.repository.UserRepository
 
 class SignupViewModel: ViewModel() {
 
-    //
+    //boolean variable to verify if validation is true or not
     var isEditTextValid = false
+    //user object to hold signup values
     var user = User(null, "", "", "",null, null, 0)
+    //Variable to get liveData response from Firebase
+    var signInResponseLiveData = MutableLiveData<Pair<Boolean, Exception?>>()
+    var createAccountResponseLiveData = MutableLiveData<Pair<Boolean, Exception?>>()
 
+    //Function to handle firebase repository for signing up a user
+    fun signUpUserInFirebase(email: String, password: String){
+        UserRepository().signupUser(email, password).observeForever {
+            signInResponseLiveData.postValue(it)
+        }
+    }
 
+    //Function to handle firebase repository for creating an account for a user
+    fun createAnAccountInFirebase(newUser: HashMap<String, Any?>){
+        UserRepository().createUserAccount(newUser).observeForever {
+            createAccountResponseLiveData.postValue(it)
+        }
+    }
 
     //Check email textField and handle use cases
     fun validateEmail(email: TextInputEditText, index: Int) {

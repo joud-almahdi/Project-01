@@ -10,7 +10,7 @@ data class Post (
 ){
     fun isPostEmpty() = user_id.isNotEmpty() && (!content.isNullOrEmpty() || !photo.isNullOrEmpty())
 
-    fun postHash() = hashMapOf(
+    fun postHash(): HashMap<String, Any?> = hashMapOf(
         "user_id" to user_id,
         "content" to content,
         "photo" to photo,

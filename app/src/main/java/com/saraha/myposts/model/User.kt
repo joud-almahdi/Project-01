@@ -15,18 +15,20 @@ data class User (
     fun isProfileEmpty() = name.isNotEmpty() && username.isNotEmpty() && email.isNotEmpty()
             && photo?.isNotEmpty() == true && personalInfo?.isNotEmpty() == true
 
-    fun signUpHash() = hashMapOf(
-        "name" to name,
-        "username" to username,
-        "email" to email,
-        "join_date" to join_date
-    )
+    fun signUpHash(): HashMap<String, Any?> = hashMapOf(
+            "name" to name,
+            "username" to username,
+            "email" to email,
+            "join_date" to join_date
+        )
 
-    fun profileHash() = hashMapOf(
-        "name" to name,
-        "username" to username,
-        "email" to email,
-        "photo" to photo,
-        "personalInfo" to personalInfo,
-        "join_date" to join_date)
+    fun profileHash(): HashMap<String, Any?> = hashMapOf(
+            "name" to name,
+            "username" to username,
+            "email" to email,
+            "photo" to photo,
+            "personalInfo" to personalInfo,
+            "join_date" to join_date
+        )
+
 }

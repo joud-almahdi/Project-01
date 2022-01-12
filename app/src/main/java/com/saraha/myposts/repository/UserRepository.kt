@@ -36,7 +36,6 @@ class UserRepository {
             }?.addOnFailureListener {
                 liveDataUser.postValue(Pair(false, it))
             }
-//authentication
         return liveDataUser
     }
 
@@ -55,7 +54,7 @@ class UserRepository {
         return liveDataUser
     }
 
-    fun createUserAccount(newUser: HashMap<String, String?>): LiveData<Pair<Boolean, Exception?>> {
+    fun createUserAccount(newUser: HashMap<String, Any?>): LiveData<Pair<Boolean, Exception?>> {
         if (dbFirestore == null) createDBFirestore()
 
         val liveDataUser = MutableLiveData<Pair<Boolean, Exception?>>()
