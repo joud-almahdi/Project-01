@@ -1,4 +1,4 @@
-package com.saraha.myposts.View.Login
+package com.saraha.myposts.view.Login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

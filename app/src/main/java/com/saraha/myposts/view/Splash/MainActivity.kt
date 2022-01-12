@@ -1,4 +1,4 @@
-package com.saraha.myposts.View.Splash
+package com.saraha.myposts.view.Splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
