@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             if (Firebase.auth.currentUser?.uid?.isNotEmpty() == true){
                 //startActivity(Intent(this, HomeActivity::class.java))
             } else {
-                startActivity(Intent(this, SignupActivity::class.java))
+                startActivity(Intent(this, loginActivity::class.java))
             }
             finish()
         }, 2000)
