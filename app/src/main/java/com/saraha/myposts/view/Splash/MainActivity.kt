@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             //Verify if user has logged in before then redirect to home or login activity
             if (Firebase.auth.currentUser?.uid?.isNotEmpty() == true){
-                //startActivity(Intent(this, HomeActivity::class.java))
+                startActivity(Intent(this, loginActivity::class.java))
             } else {
                 startActivity(Intent(this, loginActivity::class.java))
             }
