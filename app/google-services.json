@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "62491974070",
+    "project_id": "myposts-feeab",
+    "storage_bucket": "myposts-feeab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62491974070:android:c287bf01a72593b77d0917",
+        "android_client_info": {
+          "package_name": "com.saraha.myposts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "62491974070-phb2h06dud3v6sm8chubsnsk8kjc2a4h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB58Tl3YNJnJFfoEK_tRvH7hOJRE4IcTHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62491974070-phb2h06dud3v6sm8chubsnsk8kjc2a4h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
