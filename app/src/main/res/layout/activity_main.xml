@@ -15,8 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/opener_loading"
-        app:lottie_loop="true" />
-    <!-- <a href="https://iconscout.com/lotties/opener-loading" target="_blank">Opener Loading Lottie Animation</a> by <a href="https://iconscout.com/contributors/rgb4media" target="_blank">Ragab Shaban</a> -->
+        app:lottie_loop="true"
+        app:lottie_fileName="opener_loading.json" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

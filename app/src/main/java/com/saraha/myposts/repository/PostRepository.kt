@@ -76,7 +76,7 @@ class PostRepository {
             if (!task.isSuccessful) {
                 Log.d(ContentValues.TAG,"could not upload image: ${task.result?.error}")
             }
-            ref?.downloadUrl
+            ref.downloadUrl
         }?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val downloadUri = task.result
