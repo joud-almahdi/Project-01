@@ -1,21 +1,19 @@
 package com.saraha.myposts.view.Profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.saraha.myposts.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.saraha.myposts.View.Profile.ProfileViewModel
 import com.saraha.myposts.databinding.FragmentProfileBinding
 
 
 class ProfileFragment : Fragment() {
 private lateinit var binding: FragmentProfileBinding
-
+private val viewmodel:ProfileViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,8 +26,17 @@ private lateinit var binding: FragmentProfileBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
-        binding.textViewUserName
+        observer()
 
+    }
+
+
+   fun  observer()
+    {
+       viewmodel.currentUserLiveData.observe(viewLifecycleOwner,{
+           binding.textViewUserName.text=it.name
+           binding.textViewUserUsername.text=it.username
+       })
     }
 
 
