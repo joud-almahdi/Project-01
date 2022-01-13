@@ -13,6 +13,7 @@ import com.google.firebase.FirebaseNetworkException
 import com.saraha.myposts.R
 import com.saraha.myposts.view.Login.loginActivity
 import com.saraha.myposts.databinding.ActivitySignupBinding
+import com.saraha.myposts.view.Home.HomeActivity
 import java.util.*
 
 class SignupActivity : AppCompatActivity() {
@@ -43,9 +44,6 @@ class SignupActivity : AppCompatActivity() {
     private fun verifyRegistrationFormFields() {
         val password = binding.editTextSignupPassword
         val email = binding.editTextSignupEmail
-        Log.d(TAG,"SignupActivity: - verifyRegistrationFormFields: - isEditTextValid: ${viewModel.isEditTextValid}")
-        Log.d(TAG,"SignupActivity: - verifyRegistrationFormFields: - isSignUpEmpty: ${viewModel.user.isSignUpNotEmpty() }")
-        Log.d(TAG,"SignupActivity: - verifyRegistrationFormFields: - passowrd: ${password.text?.isNotEmpty() == true}")
         if (viewModel.isEditTextValid && viewModel.user.isSignUpNotEmpty() && password.text?.isNotEmpty() == true){
             viewModel.user.join_date = Calendar.getInstance().timeInMillis
 
@@ -57,9 +55,7 @@ class SignupActivity : AppCompatActivity() {
         viewModel.signUpUserInFirebase(email.text.toString(), password.text.toString())
         viewModel.signInResponseLiveData.observe(this) { result ->
             if (result.first) createUserAccount()
-            else {
-                handleException(result)
-            }
+            else handleException(result)
         }
     }
 
@@ -76,13 +72,8 @@ class SignupActivity : AppCompatActivity() {
     private fun createUserAccount() {
         viewModel.createAnAccountInFirebase(viewModel.user.signUpHash())
         viewModel.createAccountResponseLiveData.observe(this) { result ->
-            if (result.first) {
-                //startActivity(Intent(this))
-                Toast.makeText(this,"redirect", Toast.LENGTH_LONG).show()
-            }
-            else {
-                handleException(result)
-            }
+            if (result.first) startActivity(Intent(this, HomeActivity::class.java))
+            else handleException(result)
         }
     }
 

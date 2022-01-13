@@ -1,60 +1,94 @@
 package com.saraha.myposts.view.AddPost
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.saraha.myposts.R
+import com.saraha.myposts.databinding.FragmentAddPostBinding
+import com.saraha.myposts.model.Post
+import com.saraha.myposts.view.Posts.PostsFragment
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AddPostFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AddPostFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    //View model and binding lateinit property
+    val viewModel: AddPostViewModel by viewModels()
+    lateinit var binding: FragmentAddPostBinding
+
+    var imageData: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_post, container, false)
+    ): View {
+        binding = FragmentAddPostBinding.inflate(inflater, container, false)
+
+        binding.imageViewAddPostCancel.setOnClickListener {
+            parentFragmentManager.beginTransaction().replace(R.id.homeFrameLayout, PostsFragment()).commit()
+        }
+
+        onTextChangeValidation()
+
+        startImageIntent()
+
+        binding.PostButtonInAddPost.setOnClickListener {
+            val contentText = binding.editTextPostContent.text
+            if (viewModel.isEditTextValid &&
+                (contentText?.isNotEmpty() == true || imageData != null)){
+                    val post = Post(
+                        null,
+                        Firebase.auth.uid.toString(),
+                        "name",
+                        "username",
+                        "profile" ?: null,
+                        if (contentText.toString().isNotEmpty()) contentText.toString() else null,
+                        if (imageData.toString().isNotEmpty()) imageData.toString() else null,
+                        0,
+                        Calendar.getInstance().timeInMillis
+
+                    )
+            }
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddPostFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddPostFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun startImageIntent() {
+        val resultImageLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) { handleImage(result.data) }
+        }
+
+        binding.CameraFABInAddPost.setOnClickListener {
+            resultImageLauncher.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
+        }
+        binding.GalleryFABInAddPost.setOnClickListener {
+            resultImageLauncher
+                .launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI))
+        }
     }
+
+    private fun handleImage(data: Intent?) {
+        imageData = data?.data!!
+        binding.imageViewAddPostPhoto.setImageURI(imageData)
+    }
+
+    private fun onTextChangeValidation(){
+        binding.editTextPostContent.addTextChangedListener {
+            viewModel.validateText(binding.editTextPostContent)
+        }
+    }
+
 }
