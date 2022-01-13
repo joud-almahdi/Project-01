@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.saraha.myposts.databinding.ListItemPostBinding
+import com.saraha.myposts.helper.loadImage
 import com.saraha.myposts.model.Post
 
 class ViewPostsAdapter(var context: Context, var data: List<Post>) :
@@ -19,8 +20,9 @@ class ViewPostsAdapter(var context: Context, var data: List<Post>) :
     }
 
     override fun onBindViewHolder(holder: ViewPostsHolder, position: Int) {
-        //holder.binding.textViewPostedBy.setText(data[position].)
-        //holder.binding.testViewUsername.setText(data[position].)
+        holder.binding.textViewPostedBy.setText(data[position].user_name)
+        holder.binding.testViewUsername.setText(data[position].user_username)
+        holder.binding.imageViewPhoto.loadImage(data[position].user_photo)
         if (data[position].content != null){
             holder.binding.contentLayout.visibility = View.VISIBLE
             holder.binding.textViewPostContent.setText(data[position].content)
