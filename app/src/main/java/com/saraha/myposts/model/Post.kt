@@ -8,7 +8,7 @@ data class Post (
     var user_photo: String? = null,
     var content: String? = null,
     var photo: String? = null,
-    var like: Int,
+    var like: Long,
     var timeStamp: Long
 ){
     fun isPostEmpty() = user_id.isNotEmpty() && (!content.isNullOrEmpty() || !photo.isNullOrEmpty())

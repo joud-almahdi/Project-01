@@ -36,10 +36,10 @@ class PostRepository {
                             val user_id = post.getString("user_id")!!
                             val user_name = post.getString("user_name")!!
                             val user_username = post.getString("user_username")!!
-                            val user_photo = post.getString("user_photo")!!
+                            val user_photo = post.getString("user_photo")
                             val content = post.getString("content")
                             val photo = post.getString("photo")
-                            val like = post.get("like") as Int
+                            val like = post.getLong("like")!!
                             val timeStamp = post.get("timeStamp") as Long
                             val dbPost = Post(post.id, user_id, user_name, user_username, user_photo, content, photo, like, timeStamp)
                             listOfPosts.add(dbPost)

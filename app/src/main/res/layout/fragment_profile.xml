@@ -20,64 +20,63 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_gravity="center"
-        android:layout_marginTop="52dp"
+        android:layout_margin="16dp"
         app:cardCornerRadius="250dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarInProfile"
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:id="@+id/imageViewProfilePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_person_24" />
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/UserNameInProfile"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewUserName"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_margin="16dp"
         android:text="@string/username"
         android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView2"
-        tools:layout_editor_absoluteY="115dp" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarInProfile" />
 
     <TextView
-        android:id="@+id/TheOtherUserIDInProfile"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewUserUsername"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_margin="16dp"
         android:text="@username"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/UserNameInProfile"
-        tools:layout_editor_absoluteX="98dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
 
     <TextView
-        android:id="@+id/descriptionInProfile"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewUserDescription"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="104dp"
+        android:layout_margin="16dp"
         android:text="@string/description"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TheOtherUserIDInProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewUserJoinDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_margin="16dp"
         android:text="@string/joined"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionInProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
