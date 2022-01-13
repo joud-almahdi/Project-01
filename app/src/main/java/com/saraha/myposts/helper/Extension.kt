@@ -1,9 +1,16 @@
 package com.saraha.myposts.helper
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso
+
+//Check a self permission
+fun Context.hasPermissions(vararg permissions: String) = permissions.all { permission ->
+    ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+}
 
 //Show toast
 fun Context.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
