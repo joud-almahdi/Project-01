@@ -41,7 +41,7 @@ class PostsFragment : Fragment() {
 
     //Function to set data into recyclerview
     private fun setRecyclerViewWithData(posts: List<Post>) {
-        postsList = posts.sortedBy { it.timeStamp }
+        postsList = posts.sortedByDescending { it.timeStamp }
         val recyclerView = binding.recyclerViewPosts
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
         adapter = ViewPostsAdapter(this.requireContext() ,postsList)
