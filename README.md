@@ -28,6 +28,35 @@ An example design to follow for the application
 
 ![](https://paper-attachments.dropbox.com/s_00D43E3A5A0D8FBD5D571BAF731F71582FFFE3B75BFD8D60794F2E448BDFD5F0_1641966458297_image.png)
 
+## **Flowchart**
+
+The following section covers the flow of the application
+
+### Slash
+
+![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Splash.jpg)
+
+### Login and Sign up
+
+![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Login.jpg)
+
+![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/SignUp.jpg)
+
+### View Posts
+
+![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_ViewPosts.jpg)
+
+### Add Post
+
+![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_AddPosts.jpg)
+
+![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_AddPosts_Image.jpg)
+
+### User Profile
+
+![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_Profile.jpg
+
+
 ## Technology
 * Firebase Authentication: Allow authentication to easily implemnted and track user login status.
 * Firebase FireStore: To store posts, and additional user information. Any data retireved can be cached for offline access.
