@@ -8,19 +8,31 @@
     tools:context=".view.AddPost.AddPostFragment" >
 
 
-    <EditText
-        android:id="@+id/PostInAddPost"
-        android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/PostTextInAddPost"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/whatshappening"
-        android:inputType="textMultiLine"
-        android:lines="8"
+        android:layout_marginStart="76dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ProfileCardInaddPost"
-        tools:layout_editor_absoluteY="110dp" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="105dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/PostInAddPost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            tools:ignore="SpeakableTextPresentCheck">
+
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/ProfileCardInaddPost"
@@ -30,7 +42,8 @@
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="250dp"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="105dp">
+        tools:layout_editor_absoluteY="105dp"
+        tools:ignore="MissingConstraints">
 
         <ImageView
             android:id="@+id/ProfileImageInAddPost"
@@ -43,7 +56,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -56,7 +71,8 @@
             android:text="@string/post"
             app:cornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="12dp" />
+            tools:layout_editor_absoluteY="12dp"
+            tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -65,8 +81,42 @@
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_baseline_close_24"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="20dp" />
+            tools:layout_editor_absoluteY="20dp"
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PostTextInAddPost"
+        app:layout_constraintVertical_bias="1.0"
+        tools:src="@tools:sample/avatars" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/GalleryFloatingButtonInAddPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_baseline_insert_photo_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/CameraFloatingButtonInAddPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_baseline_camera_alt_24_white"
+        app:layout_constraintBottom_toTopOf="@+id/GalleryFloatingButtonInAddPost"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
