@@ -17,4 +17,7 @@
     <string name="post">Post</string>
     <string name="whatshappening">What\'s happening?</string>
     <string name="joined">Joined xx 20XX</string>
+    <string name="login_success">Logged in successfully</string>
+    <string name="reset_password_msg">Reset password link has been sent to your email</string>
+    <string name="required_msq">Field is required</string>
 </resources>
