@@ -8,57 +8,66 @@
     tools:context=".view.AddPost.AddPostFragment" >
 
 
-    <com.google.android.material.button.MaterialButton
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/post"
-        app:cornerRadius="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.029" />
-
     <EditText
-        android:id="@+id/editTextTextMultiLine"
-        android:layout_width="wrap_content"
+        android:id="@+id/PostInAddPost"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="6dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/whatshappening"
         android:inputType="textMultiLine"
+        android:lines="8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.133"
-        app:layout_constraintStart_toEndOf="@+id/cardView2"
+        app:layout_constraintStart_toEndOf="@+id/ProfileCardInaddPost"
         tools:layout_editor_absoluteY="110dp" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/ProfileCardInaddPost"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
         android:layout_marginStart="16dp"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="250dp"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="105dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="250dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_person_24" />
-        </androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/ProfileImageInAddPost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_person_24" />
     </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/PostButtonInAddPost"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@string/post"
+            app:cornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="12dp" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_baseline_close_24"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="20dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
