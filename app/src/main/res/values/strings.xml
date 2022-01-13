@@ -22,4 +22,6 @@
     <string name="required_msq">Field is required</string>
     <string name="default_image"><![CDATA[https://firebasestorage.googleapis.com/v0/b/myposts-feeab.appspot.com/o/default%2Fprofile_image.png?alt=media&token=a9043418-ac8b-40bc-8ad6-a02cda07c469]]></string>
     <string name="camera_permi_required">Permission needed to access your camera</string>
+    <string name="post_empty">Post is empty. Make sure you wrote your post or added a picture.</string>
+    <string name="post_success">Post successfully added</string>
 </resources>

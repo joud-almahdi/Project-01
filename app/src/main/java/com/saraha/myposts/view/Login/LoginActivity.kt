@@ -15,10 +15,9 @@ import com.google.firebase.ktx.Firebase
 import com.saraha.myposts.R
 import com.saraha.myposts.databinding.ActivityLoginBinding
 import com.saraha.myposts.helper.toast
-import com.saraha.myposts.model.User
 import com.saraha.myposts.view.Home.HomeActivity
 import com.saraha.myposts.view.Home.shared
-import com.saraha.myposts.view.Home.sharededitor
+import com.saraha.myposts.view.Home.sharedEditor
 import com.saraha.myposts.view.Signup.SignupActivity
 
 val auth: FirebaseAuth = Firebase.auth
@@ -29,7 +28,7 @@ class loginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         shared=this.getSharedPreferences("Login", Context.MODE_PRIVATE)
-        sharededitor= shared.edit()
+        sharedEditor= shared.edit()
         super.onCreate(savedInstanceState)
         binding=ActivityLoginBinding.inflate(layoutInflater)
 
@@ -55,12 +54,6 @@ class loginActivity : AppCompatActivity() {
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         this.toast(getString(R.string.login_success))
-                        sharededitor.putString("email", user!!.email)
-                        sharededitor.putString("id",user!!.uid)
-                        sharededitor.putBoolean("status",true)
-                        sharededitor.commit()
-
-
                         startActivity(Intent(this, HomeActivity::class.java))
                     } else {
                         this.toast(it.exception!!.message.toString(), Toast.LENGTH_LONG)

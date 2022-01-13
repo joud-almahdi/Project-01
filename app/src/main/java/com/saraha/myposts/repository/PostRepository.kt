@@ -85,4 +85,19 @@ class PostRepository {
         }
         return liveDataImage
     }
+
+    fun insertPost(newDocument: HashMap<String, Any?>): LiveData<Pair<Boolean, Exception?>>{
+        createDBFirestore()
+
+        val liveDataResponse = MutableLiveData<Pair<Boolean, Exception?>>()
+
+        dbFirestore?.collection("Post")?.add(newDocument)
+            ?.addOnCompleteListener {
+                if (it.isSuccessful) liveDataResponse.postValue(Pair(true, null))
+            }?.addOnFailureListener {
+                liveDataResponse.postValue(Pair(false, null))
+            }
+
+        return liveDataResponse
+    }
 }

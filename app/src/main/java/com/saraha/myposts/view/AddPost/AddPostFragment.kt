@@ -2,19 +2,17 @@ package com.saraha.myposts.view.AddPost
 
 import android.Manifest
 import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
@@ -26,8 +24,10 @@ import com.saraha.myposts.databinding.FragmentAddPostBinding
 import com.saraha.myposts.helper.hasPermissions
 import com.saraha.myposts.helper.toast
 import com.saraha.myposts.model.Post
+import com.saraha.myposts.view.Home.shared
 import com.saraha.myposts.view.Posts.PostsFragment
 import java.util.*
+import kotlin.collections.HashMap
 
 class AddPostFragment : Fragment() {
 
@@ -47,7 +47,7 @@ class AddPostFragment : Fragment() {
         binding = FragmentAddPostBinding.inflate(inflater, container, false)
 
         binding.imageViewAddPostCancel.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(R.id.homeFrameLayout, PostsFragment()).commit()
+            BackToMainPage()
         }
 
         checkPermission()
@@ -58,24 +58,58 @@ class AddPostFragment : Fragment() {
 
         binding.PostButtonInAddPost.setOnClickListener {
             val contentText = binding.editTextPostContent.text
-            if (viewModel.isEditTextValid &&
-                (contentText?.isNotEmpty() == true || imageData != null)){
-                    val post = Post(
-                        null,
-                        Firebase.auth.uid.toString(),
-                        "name",
-                        "username",
-                        "profile" ?: null,
-                        if (contentText.toString().isNotEmpty()) contentText.toString() else null,
-                        if (imageData.toString().isNotEmpty()) imageData.toString() else null,
-                        0,
-                        Calendar.getInstance().timeInMillis
-                    )
-                this.requireContext().toast("success")
-            }
+            checkPostContent(contentText)
         }
 
         return binding.root
+    }
+
+    private fun BackToMainPage() {
+        parentFragmentManager.beginTransaction().replace(R.id.homeFrameLayout, PostsFragment())
+            .commit()
+    }
+
+    private fun checkPostContent(contentText: Editable?) {
+        if (viewModel.isEditTextValid && (contentText?.isNotEmpty() == true || imageData != null)) {
+            val post = setPostValues(contentText)
+            if (imageData != null){
+                viewModel.setPhotoInFireStorage(imageData.toString())
+                viewModel.postedPhotoLiveData.observe(viewLifecycleOwner){
+                    insertPost(post.postHash(it))
+                }
+            } else {
+                insertPost(post.postHash(null))
+            }
+            this.requireContext().toast("success")
+        } else {
+            this.requireContext().toast(getString(R.string.post_empty))
+        }
+    }
+
+    private fun setPostValues(contentText: Editable?): Post {
+        return Post(
+            null,
+            Firebase.auth.uid.toString(),
+            shared.getString("name", Firebase.auth.uid!!) ?: "",
+            shared.getString("username", Firebase.auth.uid!!) ?: "",
+            shared.getString("profile", null),
+            if (contentText.toString().isNotEmpty()) contentText.toString() else null,
+            if (imageData.toString().isNotEmpty()) imageData.toString() else null,
+            0,
+            Calendar.getInstance().timeInMillis
+        )
+    }
+
+    fun insertPost(post: HashMap<String, Any?>){
+        viewModel.insertPostIntoFireStore(post)
+        viewModel.firebaseResponseLiveData.observe(viewLifecycleOwner){
+            if (it.first){
+                this.requireContext().toast(getString(R.string.post_success))
+            } else {
+                this.requireContext().toast(it.second?.message ?: "Could not publish post")
+            }
+            BackToMainPage()
+        }
     }
 
     private fun startImageIntent() {
@@ -103,7 +137,7 @@ class AddPostFragment : Fragment() {
     }
 
     private fun handleCamera(data: Intent?) {
-        val imageBitmap = data?.data!! as Bitmap
+        val imageBitmap = data?.getExtras()?.get("data") as Bitmap
         binding.imageViewAddPostPhoto.setImageBitmap(imageBitmap)
     }
 

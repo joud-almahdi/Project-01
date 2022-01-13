@@ -4,27 +4,47 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.saraha.myposts.R
 import com.saraha.myposts.databinding.ActivityHomeBinding
 import com.saraha.myposts.view.AddPost.AddPostFragment
 import com.saraha.myposts.view.Posts.PostsFragment
 import com.saraha.myposts.view.Profile.ProfileFragment
+
 lateinit var shared: SharedPreferences
-lateinit var sharededitor: SharedPreferences.Editor
+lateinit var sharedEditor: SharedPreferences.Editor
+
 class HomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityHomeBinding
+    val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
 
+        shared = this.getSharedPreferences("Account", Context.MODE_PRIVATE)
+
+        getUsersInfo()
+
         setOnBottomNavItemClick()
 
         setContentView(binding.root)
-        shared=this.getSharedPreferences("Login", Context.MODE_PRIVATE)
-        sharededitor=shared.edit()
+    }
 
+    fun getUsersInfo(){
+        viewModel.getUsersInfoFromFirebase()
+
+        viewModel.currentUserLiveData.observe(this){user ->
+            sharedEditor = shared.edit()
+            sharedEditor.putString("name", user.name)
+            sharedEditor.putString("username", user.username)
+            sharedEditor.putString("email", user.email)
+            sharedEditor.putString("photo", user.photo)
+            sharedEditor.putString("personalInfo", user.personalInfo)
+            sharedEditor.putLong("join_date", user.join_date)
+            sharedEditor.commit()
+        }
     }
 
     fun setOnBottomNavItemClick(){

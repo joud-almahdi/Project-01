@@ -1,5 +1,6 @@
 package com.saraha.myposts.view.Posts
 
+import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.saraha.myposts.model.Post
