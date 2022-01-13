@@ -1,5 +1,7 @@
 package com.saraha.myposts.view.Home
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +10,8 @@ import com.saraha.myposts.databinding.ActivityHomeBinding
 import com.saraha.myposts.view.AddPost.AddPostFragment
 import com.saraha.myposts.view.Posts.PostsFragment
 import com.saraha.myposts.view.Profile.ProfileFragment
-
+lateinit var shared: SharedPreferences
+lateinit var sharededitor: SharedPreferences.Editor
 class HomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityHomeBinding
 
@@ -19,6 +22,9 @@ class HomeActivity : AppCompatActivity() {
         setOnBottomNavItemClick()
 
         setContentView(binding.root)
+        shared=this.getSharedPreferences("Login", Context.MODE_PRIVATE)
+        sharededitor=shared.edit()
+
     }
 
     fun setOnBottomNavItemClick(){
