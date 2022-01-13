@@ -29,13 +29,13 @@ An example design to follow for the application
 ![](https://paper-attachments.dropbox.com/s_00D43E3A5A0D8FBD5D571BAF731F71582FFFE3B75BFD8D60794F2E448BDFD5F0_1641966458297_image.png)
 
 ## Technology
-Firebase Authentication: Allow authentication to easily implemnted and track user login status.
-Firebase FireStore: To store posts, and additional user information. Any data retireved can be cached for offline access.
-Firebase FireStorage: To store photos online and link the download Uri to the prespective document
+* Firebase Authentication: Allow authentication to easily implemnted and track user login status.
+* Firebase FireStore: To store posts, and additional user information. Any data retireved can be cached for offline access.
+* Firebase FireStorage: To store photos online and link the download Uri to the prespective document
 
 ## Sources
-[Twuaiq](https://github.com/Twuaiq-1000-Kotlin-01/Project-01)
-[Firebase](https://firebase.google.com/?gclid=Cj0KCQiAuP-OBhDqARIsAD4XHpfRVOGWcZtcz6Cl6Jwz5WfPycv9G3G8S1yrn9g1n4fzBJ4Ae44Xh_oaAoeUEALw_wcB&gclsrc=aw.ds)
+* [Twuaiq](https://github.com/Twuaiq-1000-Kotlin-01/Project-01)
+* [Firebase](https://firebase.google.com/?gclid=Cj0KCQiAuP-OBhDqARIsAD4XHpfRVOGWcZtcz6Cl6Jwz5WfPycv9G3G8S1yrn9g1n4fzBJ4Ae44Xh_oaAoeUEALw_wcB&gclsrc=aw.ds)
 
 ## Licence
 Project has not been licenced 
