@@ -23,7 +23,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView"
+                    android:id="@+id/ProfileCardInaddPost"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="8dp"
@@ -48,7 +48,7 @@
                     android:text="Me"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/cardView"
+                    app:layout_constraintStart_toEndOf="@+id/ProfileCardInaddPost"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -61,7 +61,7 @@
                     android:text="@me"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/cardView"
+                    app:layout_constraintStart_toEndOf="@+id/ProfileCardInaddPost"
                     app:layout_constraintTop_toBottomOf="@+id/textViewPostedBy" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
