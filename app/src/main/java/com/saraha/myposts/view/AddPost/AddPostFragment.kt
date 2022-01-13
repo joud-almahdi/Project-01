@@ -2,6 +2,7 @@ package com.saraha.myposts.view.AddPost
 
 import android.Manifest
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -9,6 +10,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +30,8 @@ import com.saraha.myposts.view.Home.shared
 import com.saraha.myposts.view.Posts.PostsFragment
 import java.util.*
 import kotlin.collections.HashMap
+import java.io.ByteArrayOutputStream
+
 
 class AddPostFragment : Fragment() {
 
@@ -36,6 +40,7 @@ class AddPostFragment : Fragment() {
     lateinit var binding: FragmentAddPostBinding
 
     var imageData: Uri? = null
+    var imageByte: ByteArray? = null
 
     val appPermissionList = arrayOf(
         Manifest.permission.CAMERA)
@@ -70,10 +75,11 @@ class AddPostFragment : Fragment() {
     }
 
     private fun checkPostContent(contentText: Editable?) {
-        if (viewModel.isEditTextValid && (contentText?.isNotEmpty() == true || imageData != null)) {
+        if (viewModel.isEditTextValid &&
+            (contentText?.isNotEmpty() == true || (imageData != null || imageByte != null))) {
             val post = setPostValues(contentText)
             if (imageData != null){
-                viewModel.setPhotoInFireStorage(imageData.toString())
+                viewModel.setPhotoInFireStorage(imageData.toString(), imageByte)
                 viewModel.postedPhotoLiveData.observe(viewLifecycleOwner){
                     insertPost(post.postHash(it))
                 }
@@ -138,6 +144,11 @@ class AddPostFragment : Fragment() {
 
     private fun handleCamera(data: Intent?) {
         val imageBitmap = data?.getExtras()?.get("data") as Bitmap
+
+        val stream = ByteArrayOutputStream()
+        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        imageByte = stream.toByteArray()
+
         binding.imageViewAddPostPhoto.setImageBitmap(imageBitmap)
     }
 

@@ -1,6 +1,8 @@
 package com.saraha.myposts.view.AddPost
 
+import android.content.ContentValues.TAG
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.material.textfield.TextInputEditText
@@ -17,8 +19,9 @@ class AddPostViewModel: ViewModel() {
 
 
     //Function to handle firebase repository for uploading photo
-    fun setPhotoInFireStorage(photo: String){
-        PostRepository().setPhotoInStorage(Uri.parse(photo)).observeForever {
+    fun setPhotoInFireStorage(photo: String, imageByte: ByteArray?){
+        Log.d(TAG,"AddPostViewModel: - setPhotoInFireStorage: - : ${photo} ${imageByte}")
+        PostRepository().setPhotoInStorage(Uri.parse(photo), imageByte).observeForever {
             if (it.isNotEmpty()) postedPhotoLiveData.postValue(it)
         }
     }
