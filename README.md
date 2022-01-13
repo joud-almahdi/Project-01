@@ -34,28 +34,25 @@ The following section covers the flow of the application
 
 ### Slash
 
-![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Splash.jpg)
+<img src="https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Splash.jpg?raw=true" width="200" />  <img 
 
 ### Login and Sign up
 
-![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Login.jpg)
-
-![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/SignUp.jpg)
-
+<img src="https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Login.jpg?raw=true" width="200" />  <img                                                                                                                                       
+<img src="https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/SignUp.jpg?raw=true" width="200" />  <img                                                                                                                                
 ### View Posts
-
-![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_ViewPosts.jpg)
+                                                                                                                                    
+<img src="https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_ViewPosts.jpg?raw=true" width="200" />  <img 
 
 ### Add Post
 
-![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_AddPosts.jpg)
+<img src="https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_AddPosts.jpg?raw=true" width="200" />  <img 
 
-![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_AddPosts_Image.jpg)
+<img src="https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_AddPosts_Image.jpg?raw=true" width="200" />  <img 
 
 ### User Profile
-
-![](https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_Profile.jpg
-
+                                                                                                                                                   
+<img src="https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_Profile.jpg?raw=true" width="200" />  <img 
 
 ## Technology
 * Firebase Authentication: Allow authentication to easily implemnted and track user login status.
