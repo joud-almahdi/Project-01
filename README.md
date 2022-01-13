@@ -53,9 +53,7 @@ All post by all user are shown from the latest to the oldest. Users can like pos
 
 A user can add new post and include with a text, an image, or both, which then gets added in the View Posts interface in a timeline order.
 
-<img src="https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_AddPosts.jpg?raw=true" width="200" /> 
-
-<img src="https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_AddPosts_Image.jpg?raw=true" width="200" /> 
+<img src="https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_AddPosts.jpg?raw=true" width="200" /> <img src="https://github.com/joud-almahdi/Project-01/blob/main/app/src/main/res/mipmap-mdpi/Home_AddPosts_Image.jpg?raw=true" width="200" /> 
 
 ### User Profile
 
