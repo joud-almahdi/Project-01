@@ -6,39 +6,54 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import com.saraha.myposts.View.Profile.ProfileViewModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.saraha.myposts.R
 import com.saraha.myposts.databinding.FragmentProfileBinding
+import com.saraha.myposts.helper.loadImage
+import com.saraha.myposts.view.Home.shared
+import java.util.*
 
 
 class ProfileFragment : Fragment() {
-private lateinit var binding: FragmentProfileBinding
-private val viewmodel:ProfileViewModel by activityViewModels()
+    private lateinit var binding: FragmentProfileBinding
+
+    val arrayOfMonthName = listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         binding= FragmentProfileBinding.inflate(layoutInflater,container,false)
+
+        setupToolbar()
+
+        setValues()
+
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupToolbar()
-        observer()
+    fun setValues(){
+        val photo = shared.getString("profile", null)
+        if (photo == null) binding.imageViewProfilePhoto.setImageResource(R.drawable.ic_person_24)
+        else {binding.imageViewProfilePhoto.loadImage(photo)}
 
+        val info = shared.getString("personalInfo", "No bio")
+        binding.textViewUserDescription.setText(info)
+
+        val name = shared.getString("name", Firebase.auth.uid!!)
+        binding.textViewUserName.setText(name)
+
+        val username = shared.getString("username", Firebase.auth.uid!!)
+        val usernameText = getString(R.string.at)+username
+        binding.textViewUserUsername.setText(usernameText)
+
+        val join_date = shared.getLong("join_date", 0)
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = join_date
+        val joinDateText = "Joined "+arrayOfMonthName[calendar.get(Calendar.MONTH)]+" "+calendar.get(Calendar.YEAR)
+        binding.textViewUserJoinDate.setText(joinDateText)
     }
-
-
-   fun  observer()
-    {
-       viewmodel.currentUserLiveData.observe(viewLifecycleOwner,{
-           binding.textViewUserName.text=it.name
-           binding.textViewUserUsername.text=it.username
-       })
-    }
-
 
     private fun setupToolbar() {
         val mainToolbar = binding.toolbarInProfile

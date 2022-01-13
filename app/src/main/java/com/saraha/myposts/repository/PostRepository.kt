@@ -61,7 +61,7 @@ class PostRepository {
         return liveDataResponse
     }
 
-    fun setPhotoInStorage(fileUri: Uri?, byte: ByteArray?): LiveData<String> {
+    fun setPhotoInStorage(fileUri: Uri): LiveData<String> {
         createDBStorage()
 
         val fileName = UUID.randomUUID().toString() +".jpg"
@@ -70,9 +70,7 @@ class PostRepository {
 
         val ref = dbFBStorage?.reference?.child(Firebase.auth.uid.toString())?.child(fileName)
 
-        val uploadTask = if (fileUri != null) ref?.putFile(fileUri) else ref?.putBytes(byte!!)
-
-        Log.d(TAG,"PostRepository: - setPhotoInStorage: - : ${fileUri} - ${byte}")
+        val uploadTask = ref?.putFile(fileUri)
 
         uploadTask?.continueWithTask { task ->
             if (!task.isSuccessful) {

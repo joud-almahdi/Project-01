@@ -55,8 +55,6 @@ class AddPostFragment : Fragment() {
             BackToMainPage()
         }
 
-        checkPermission()
-
         onTextChangeValidation()
 
         startImageIntent()
@@ -75,11 +73,10 @@ class AddPostFragment : Fragment() {
     }
 
     private fun checkPostContent(contentText: Editable?) {
-        if (viewModel.isEditTextValid &&
-            (contentText?.isNotEmpty() == true || (imageData != null || imageByte != null))) {
+        if (viewModel.isEditTextValid && (contentText?.isNotEmpty() == true || imageData != null)) {
             val post = setPostValues(contentText)
             if (imageData != null){
-                viewModel.setPhotoInFireStorage(imageData.toString(), imageByte)
+                viewModel.setPhotoInFireStorage(imageData.toString())
                 viewModel.postedPhotoLiveData.observe(viewLifecycleOwner){
                     insertPost(post.postHash(it))
                 }
@@ -123,14 +120,7 @@ class AddPostFragment : Fragment() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) { handleGallery(result.data) }
         }
-        val resultImageLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) { handleCamera(result.data) }
-        }
 
-        binding.CameraFABInAddPost.setOnClickListener {
-            resultImageLauncher.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
-        }
         binding.GalleryFABInAddPost.setOnClickListener {
             resultGalleryLauncher
                 .launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI))
@@ -142,45 +132,10 @@ class AddPostFragment : Fragment() {
         binding.imageViewAddPostPhoto.setImageURI(imageData)
     }
 
-    private fun handleCamera(data: Intent?) {
-        val imageBitmap = data?.getExtras()?.get("data") as Bitmap
-
-        val stream = ByteArrayOutputStream()
-        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-        imageByte = stream.toByteArray()
-
-        binding.imageViewAddPostPhoto.setImageBitmap(imageBitmap)
-    }
-
     private fun onTextChangeValidation(){
         binding.editTextPostContent.addTextChangedListener {
             viewModel.validateText(binding.editTextPostContent)
         }
-    }
-
-    //Function to check app location permission
-    private fun checkPermission(){
-        val cameraPermission = this.requireContext().hasPermissions(appPermissionList[0])
-
-        if ( !cameraPermission) {
-            ActivityCompat.requestPermissions(this.requireActivity(), appPermissionList, 4)
-            binding.CameraFABInAddPost.isEnabled = false
-        } else { binding.CameraFABInAddPost.isEnabled = true }
-    }
-
-    //Function to handle permission response
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 4){
-            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                this.requireContext().toast(getString(R.string.camera_permi_required))
-                binding.CameraFABInAddPost.isEnabled = true
-            }
-        } else { binding.CameraFABInAddPost.isEnabled = false }
     }
 
 }

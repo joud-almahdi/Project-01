@@ -19,9 +19,8 @@ class AddPostViewModel: ViewModel() {
 
 
     //Function to handle firebase repository for uploading photo
-    fun setPhotoInFireStorage(photo: String, imageByte: ByteArray?){
-        Log.d(TAG,"AddPostViewModel: - setPhotoInFireStorage: - : ${photo} ${imageByte}")
-        PostRepository().setPhotoInStorage(Uri.parse(photo), imageByte).observeForever {
+    fun setPhotoInFireStorage(photo: String){
+        PostRepository().setPhotoInStorage(Uri.parse(photo)).observeForever {
             if (it.isNotEmpty()) postedPhotoLiveData.postValue(it)
         }
     }
