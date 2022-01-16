@@ -58,7 +58,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="@me"
+                    android:text="@string/username_placeholder"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/ProfileCardInaddPost"
@@ -125,10 +125,23 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_share_24" />
+
+                    <TextView
+                        android:id="@+id/LikeNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/like_placeholder"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageViewLikePost"
+                        app:layout_constraintEnd_toStartOf="@+id/imageViewLikePost"
+                        app:layout_constraintTop_toTopOf="parent" />
+
 
                     <ImageView
                         android:id="@+id/imageViewLikePost"

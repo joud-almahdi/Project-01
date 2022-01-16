@@ -29,4 +29,7 @@
     <string name="home">Home</string>
     <string name="add">Add</string>
     <string name="profile">Profile</string>
+    <string name="me">/@me</string>
+    <string name="username_placeholder">\@me</string>
+    <string name="like_placeholder">0</string>
 </resources>

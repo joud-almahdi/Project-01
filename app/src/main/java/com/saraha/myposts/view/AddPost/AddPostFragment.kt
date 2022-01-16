@@ -60,7 +60,7 @@ class AddPostFragment : Fragment() {
     }
 
     private fun checkPostContent(contentText: Editable?) {
-        if (viewModel.isEditTextValid && (contentText?.isNotEmpty() == true || imageData != null)) {
+        if ((viewModel.isEditTextValid && contentText?.isNotEmpty() == true) || imageData != null) {
             val post = setPostValues(contentText)
             if (imageData != null){
                 viewModel.setPhotoInFireStorage(imageData.toString())
@@ -70,7 +70,6 @@ class AddPostFragment : Fragment() {
             } else {
                 insertPost(post.postHash(null))
             }
-            this.requireContext().toast("success")
         } else {
             this.requireContext().toast(getString(R.string.post_empty))
         }
